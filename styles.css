@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "roboto";
+}
+
+.calculator {
+display: flex;
+flex-direction: column;
+width: 450px;
+height: 650px;
+background-color: aliceblue;
+justify-content: center;
+align-items: center;
+gap: 8px;
+}
+
+.display {
+    background-color:darkgrey;
+    width: 400px;
+    height: 100px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 400px;
+    height: 500px;
+    gap: 8px;
+}
+
+#AC {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.numbers {
+    
