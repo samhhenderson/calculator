@@ -2,26 +2,30 @@
 
 var num1 = `0`;
 var num2 = `0`;
-var tempOperator = `none`;
 var operator = `none`;
 var calcStatus = `clear`;
-
 const display = document.querySelector(`.display`);
+
+let round = function(numberToRound) {
+    return Math.round((numberToRound + Number.EPSILON) * 100000000) / 100000000;
+}
 
 window.allClear = () => {
     num1 = `0`;
     num2 = `0`;
     operator = `none`;
-    tempOperator = `none`;
+    calcStatus = `clear`;
     writeDisplay(num1);
 }
 
 window.deleteLast = () => {
+    if (num1 == `0`) return;
     num1 = num1.slice(0, -1);
     if (num1 === ``) num1 = `0`;
     writeDisplay(num1);
 }
 
+window.equals = (a, b) => a;
 window.add = (a, b) => a + b;
 window.subtract = (a, b) => a - b;
 window.multiply = (a, b) => a * b;
@@ -38,6 +42,7 @@ const handleClicks = function(event) {
         case `numbers`:
             switch (buttonID) {
                 case `.`:
+                    if (operator === `equals`) allClear();
                     if (num1.includes(`.`)) return;
                     num1 = `${num1}${buttonID}`
                     break;
@@ -47,48 +52,41 @@ const handleClicks = function(event) {
                     else num1 = `-${num1}`;
                     break;
                 default: 
+                    if (operator === `equals`) allClear();
                     if (num1 == `0`) num1 = ``;
                     num1 = `${num1}${buttonID}`;
                     break;
             }
             writeDisplay(num1);
-            /* operator = tempOperator;
-            tempOperator = `none`; */
-            calcStatus = ready;
+            if (calcStatus === `clear`) calcStatus = `readyForOp`;
+            else if (calcStatus === `readyForSecondNum`) calcStatus = `eval`;
             break;
 
         case `operators`:
-            //handle the first entries after a clear
-            if (operator === `none` && tempOperator === `none`) {
-                tempOperator = buttonID;
-
+            if (calcStatus === `readyForOp`) {
+                operator = buttonID;
                 num2 = num1;
-                num1 = `0`;
-                break;
+                num1 = 0;
+                calcStatus = `readyForSecondNum`;
             }
-            else if (operator === `none`) {
-                tempOperator = buttonID;
-                break;
-            }
-            num1 = Number(num1);
-            num2 = Number(num2);
-            num2 = window[operator](num2, num1);
+            else if (calcStatus === `eval`) {
+            num1 = round(Number(num1));
+            num2 = round(Number(num2));
+            num2 = round(window[operator](num2, num1));
             writeDisplay(num2);
-            tempOperator = buttonID;
-            operator = `none`;
+            operator = buttonID;
             num1 = '0';
+            }
             break;
         case `dataMgt`:
             window[buttonID]();
             break;
-
     }
-
 }
-
 
 //Function that puts stuff on the Display
 const writeDisplay = function(input) {
+    if (input.toString().length > 13) input = `ERR`;
     display.textContent = input;
 }
 
@@ -96,8 +94,5 @@ const writeDisplay = function(input) {
 document.querySelectorAll(`.buttons`).forEach((button) => {
     button.addEventListener('click', (event) => handleClicks(event))
 })
+
 writeDisplay(num1);
-//1. When clicked, store the value of the button
-//2. Display the value of the button
-//3. Perform the desired operations when = is pressed
-//4. Display the resultant
