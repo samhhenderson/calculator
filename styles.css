@@ -43,7 +43,8 @@ body {
 }
 
 .operators,
-.numbers {
+.numbers,
+.dataMgt {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +53,8 @@ body {
 }
 
 .operators:hover,
-.numbers:hover {
+.numbers:hover, 
+.dataMgt:hover {
     background-color:lightsteelblue;
 
 }
