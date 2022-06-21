@@ -29,10 +29,7 @@ window.equals = (a, b) => a;
 window.add = (a, b) => a + b;
 window.subtract = (a, b) => a - b;
 window.multiply = (a, b) => a * b;
-window.divide = (a, b) => {
-    if (b == 0) return `Please don't do that`;
-    else return a / b;
-}
+window.divide = (a, b) => a / b;
 
 //Main function that handles user interaction
 const handleClicks = function(event) {
@@ -47,7 +44,7 @@ const handleClicks = function(event) {
                     num1 = `${num1}${buttonID}`
                     break;
                 case (`+/-`):
-                    if (num1 == `0`) return;
+                    if (num1 === `0`) return;
                     if (num1.includes(`-`)) num1 = num1.slice(1);
                     else num1 = `-${num1}`;
                     break;
@@ -73,7 +70,8 @@ const handleClicks = function(event) {
             num1 = round(Number(num1));
             num2 = round(Number(num2));
             num2 = round(window[operator](num2, num1));
-            writeDisplay(num2);
+            if (!Number.isFinite(num2)) writeDisplay(`WOOPS!`);
+            else writeDisplay(num2);
             operator = buttonID;
             num1 = '0';
             }
@@ -86,7 +84,7 @@ const handleClicks = function(event) {
 
 //Function that puts stuff on the Display
 const writeDisplay = function(input) {
-    if (input.toString().length > 13) input = `ERR`;
+    if (input.toString().length > 18) input = `ERR`;
     display.textContent = input;
 }
 

@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -35,7 +36,7 @@ body {
     height: 100px;
     border: 2px solid black;
     border-radius: 8px;
-    font-size: 48px;
+    font-size: 36px;
 }
 
 .buttons {
@@ -84,4 +85,8 @@ body {
 
 #equals {
     background-color: rgb(250, 220, 164);
+}
+
+.footer {
+    margin-top: 25px;
 }
