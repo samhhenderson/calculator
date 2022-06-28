@@ -26,10 +26,11 @@ body {
     border-radius: 16px;
 }
 
-.display {
+.displayContainer {
     display: flex;
-    justify-content: end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
     padding: 10px;
     background-color:darkgrey;
     width: 376px;
@@ -37,6 +38,12 @@ body {
     border: 2px solid black;
     border-radius: 8px;
     font-size: 36px;
+    gap: 24px;
+}
+
+.upperDisplay {
+    font-size: 24px;
+    min-height: 28px;
 }
 
 .buttons {
@@ -63,14 +70,11 @@ body {
 .operators:hover,
 .numbers:hover, 
 .dataMgt:hover,
-#equals:hover {
+#Enter:hover {
     background-color:rgb(112, 112, 112);
 
 }
-#allClear {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
+
 .operators {
     background-color:rgb(183, 192, 243)
 }
@@ -83,7 +87,7 @@ body {
     background-color:rgb(144, 207, 144);
 }
 
-#equals {
+#Enter {
     background-color: rgb(250, 220, 164);
 }
 
