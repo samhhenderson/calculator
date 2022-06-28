@@ -1,4 +1,5 @@
 //var dataArray = new Array[{num1:``}, {num2:``}, {operator:``}]
+//rebuild using RPN
 
 var num1 = `0`;
 var num2 = `0`;
